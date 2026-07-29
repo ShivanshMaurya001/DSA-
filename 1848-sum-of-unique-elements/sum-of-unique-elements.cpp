@@ -3,24 +3,17 @@ public:
     int sumOfUnique(vector<int>& nums) {
 
         unordered_map<int,int> mp;
-        vector<int> ans;
 
         for (int i = 0; i < nums.size(); i++) {
             mp[nums[i]]++;
         }
+        int sum = 0;
 
-        for (auto x : nums) {
-            if (mp[x] == 1) {
-                ans.push_back(x);
+        for (int i = 0; i < nums.size(); i++) {
+            if (mp[nums[i]] == 1) {
+                sum = sum + nums[i];
             }
         }
-
-        int val = 0;
-
-        for (int i = 0; i < ans.size(); i++) {
-            val = val + ans[i];
-        }
-
-        return val;
+        return sum;
     }
 };
