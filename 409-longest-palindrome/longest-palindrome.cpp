@@ -25,7 +25,7 @@ public:
 
         if(found)
         {
-            ans++;
+            ans= ans + 1;
         }
 
         return ans;
