@@ -1,7 +1,7 @@
 class Solution {
 public:
-    int solve(int i, int j, string &word1, string &word2,
-              vector<vector<int>> &dp) {
+    int solve(int i, int j, string& word1, string& word2,
+              vector<vector<int>>& dp) {
 
         if (i == word1.size())
             return word2.size() - j;
@@ -12,17 +12,24 @@ public:
         if (dp[i][j] != -1)
             return dp[i][j];
 
+        int ans;
+
         if (word1[i] == word2[j]) {
-            return dp[i][j] = solve(i + 1, j + 1, word1, word2, dp);
+            ans = solve(i + 1, j + 1, word1, word2, dp);
+        } else {
+            int  w1= 1 + solve(i + 1, j, word1, word2, dp);
+            int w2 = 1 + solve(i, j + 1, word1, word2, dp);
+
+            ans = min(w1,w2);
         }
 
-        return dp[i][j] = 1 + min(
-            solve(i + 1, j, word1, word2, dp),   
-            solve(i, j + 1, word1, word2, dp)    
-        );
+        dp[i][j] = ans;
+
+        return dp[i][j];
     }
 
     int minDistance(string word1, string word2) {
+
         int n = word1.size();
         int m = word2.size();
 
