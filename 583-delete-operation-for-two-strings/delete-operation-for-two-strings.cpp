@@ -12,7 +12,7 @@ public:
         if (dp[i][j] != -1)
             return dp[i][j];
 
-        int ans;
+        int ans = 0;
 
         if (word1[i] == word2[j]) {
             ans = solve(i + 1, j + 1, word1, word2, dp);
