@@ -1,6 +1,6 @@
 class Solution {
 public:
-    int solve(int i, int j, string &s, string &t, vector<vector<int>>& dp) {
+    int solve(int i, int j, string& s, string& t, vector<vector<int>>& dp) {
 
         // t complete ho gaya
         if (j == t.size())
@@ -23,8 +23,13 @@ public:
 
     int numDistinct(string s, string t) {
 
-        vector<vector<int>> dp(s.size(), vector<int>(t.size(), -1));
+        int n = s.size();
+        int m = t.size();
+        int i = 0;
+        int j = 0;
 
-        return solve(0, 0, s, t, dp);
+        vector<vector<int>> dp(n, vector<int>(m, -1));
+
+        return solve(i,j, s, t, dp);
     }
 };
