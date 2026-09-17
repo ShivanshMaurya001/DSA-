@@ -26,12 +26,19 @@ public:
 
         for (int i = 0; i < s.size(); i++) {
 
-            if (isalnum(s[i])) {
-                ans.push_back(tolower(s[i]));
+            if ((s[i] >= 'a' && s[i] <= 'z')  ||  (s[i] >= 'A' && s[i] <= 'Z') || (s[i] >= '0' && s[i] <= '9')) {
+
+                ans.push_back(s[i]);
+            }
+        }
+        for (int i = 0; i < ans.size(); i++) {
+
+            if (ans[i] >= 'A' && ans[i] <= 'Z') {
+                ans[i] = ans[i] + 32;
             }
         }
 
-        bool val = ispal(ans);
-        return val;
+        bool x = ispal(ans);
+        return x;
     }
 };
