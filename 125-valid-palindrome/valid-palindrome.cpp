@@ -1,9 +1,7 @@
 class Solution {
 public:
-    bool ispal(vector<char>& ans) {
+    bool ispal(vector<char>& ans,int st,int e) {
 
-        int st = 0;
-        int e = ans.size() - 1;
 
         while (st <= e) {
 
@@ -36,8 +34,10 @@ public:
                 ans[i] = ans[i] + 32;
             }
         }
+        int st = 0;
+        int e = ans.size() - 1;
 
-        bool x = ispal(ans);
+        bool x = ispal(ans,st,e);
         return x;
     }
 };
