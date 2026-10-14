@@ -1,53 +1,42 @@
-
 class Solution {
 public:
     int sumSubarrayMins(vector<int>& arr) {
         int n = arr.size();
         int MOD = 1000000007;
 
-        vector<int> left(n);
-        vector<int> right(n);
         stack<int> st;
-
-        for (int i = 0; i < n; i++) {
-            while (!st.empty() && arr[st.top()] >= arr[i]) {
-                st.pop();
-            }
-
-            if (st.empty()) {
-                left[i] = i + 1;
-            } else {
-                left[i] = i - st.top();
-            }
-
-            st.push(i);
-        }
-
-        while (!st.empty()) {
-            st.pop();
-        }
-
-        for (int i = n - 1; i >= 0; i--) {
-            while (!st.empty() && arr[st.top()] > arr[i]) {
-                st.pop();
-            }
-
-            if (st.empty()) {
-                right[i] = n - i;
-            } else {
-                right[i] = st.top() - i;
-            }
-
-            st.push(i);
-        }
-
         long long ans = 0;
 
-        for (int i = 0; i < n; i++) {
-            long long val =
-                (long long)arr[i] * left[i] * right[i];
+        for (int i = 0; i <= n; i++) {
 
-            ans = (ans + val) % MOD;
+            while (!st.empty() &&
+                   (i == n || arr[st.top()] >= arr[i])) {
+
+                int mid = st.top();
+                st.pop();
+
+                int left;
+
+                if (st.empty()) {
+                    left = -1;
+                } else {
+                    left = st.top();
+                }
+
+                int right = i;
+
+                long long leftCount = mid - left;
+                long long rightCount = right - mid;
+
+                long long contribution =
+                    (arr[mid] * leftCount % MOD) * rightCount % MOD;
+
+                ans = (ans + contribution) % MOD;
+            }
+
+            if (i < n) {
+                st.push(i);
+            }
         }
 
         return ans;
