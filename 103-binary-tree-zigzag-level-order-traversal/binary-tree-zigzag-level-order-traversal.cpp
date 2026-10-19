@@ -21,7 +21,7 @@ public:
         queue<TreeNode*> q;
         q.push(root);
 
-        int level = 0;
+        bool vall = false;
 
         while (!q.empty()) {
 
@@ -42,12 +42,19 @@ public:
                     q.push(node->right);
             }
 
-            if (level % 2 == 1)
+            if(vall == false){
+
+                ans.push_back(v);
+                vall = true;
+
+            }
+            else{
                 reverse(v.begin(), v.end());
+                ans.push_back(v);
+                vall = false;
 
-            ans.push_back(v);
-
-            level++;
+            }
+    
         }
 
         return ans;
